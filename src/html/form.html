@@ -1,9 +1,0 @@
-<div id="input-form">
-    <input type="text" name="name" placeholder="nickName" maxlength="20" minlength="1" value=""/>
-</div>
-<script>
-    const nickName = localStorage.getItem('nickName')
-    if(nickName) {
-        document.querySelector('#input-form input').value = nickName
-    }
-</script>

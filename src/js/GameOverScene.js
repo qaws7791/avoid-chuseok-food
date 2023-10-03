@@ -4,6 +4,11 @@ import { v4 as uuidv4 } from 'uuid'
 import Background from '/images/background.jpg'
 import { LeaderBoard } from 'phaser3-rex-plugins/plugins/firebase-components'
 
+const Form = `
+<div id="input-form" style="padding: 15px; background-color: #ffffff66; border-radius: 12px;">
+<input type="text" name="name" placeholder="이름" maxlength="20" minlength="1" value="" style="padding: 10px; font-size: 20px; width: 400px;"/>
+<button id="submit" style="padding: 8px; font-size: 18px;">저장</button>
+</div>`
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
     super('gameOver')
@@ -16,7 +21,6 @@ export default class GameOverScene extends Phaser.Scene {
 
   preload() {
     this.load.image('background', Background)
-    this.load.html('form', 'form.html')
   }
 
   create() {
@@ -70,15 +74,7 @@ export default class GameOverScene extends Phaser.Scene {
     })
 
     //nickname
-    const element = this.add.dom(width / 2, height / 2).createFromCache('form')
-
-    this.ninkname = this.add
-      .text(width / 2, (height * 1) / 2, 'Hello, --', {
-        color: '#FFFFFF',
-        fontSize: 60,
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
+    const element = this.add.dom(width / 2, height / 2).createFromHTML(Form)
 
     this.returnKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.ENTER
