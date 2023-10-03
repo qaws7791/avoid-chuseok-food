@@ -12,12 +12,12 @@ export default class LoadingScene extends Phaser.Scene {
 
   create() {
     const { x, y, height, width } = this.cameras.main
-    //배경
+    //background
     const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0)
     const scaleX = this.sys.canvas.width / backgroundImage.width
-
     backgroundImage.setScale(scaleX).setScrollFactor(0, 1)
 
+    // title
     this.title = this.add
       .text(x + width / 2, y + height / 4, '🌕추석 음식 피하기🍡')
       .setFill('#fff')
@@ -44,6 +44,7 @@ export default class LoadingScene extends Phaser.Scene {
       .setAlign('center')
       .setPadding(30)
 
+    // start button
     const startButton = this.createButton(
       x + width / 2,
       y + height * (3 / 5),
@@ -53,12 +54,13 @@ export default class LoadingScene extends Phaser.Scene {
       this.scene.start('game')
     })
 
-    const LeaderBoardButton = this.createButton(
+    // leaderboard button
+    const leaderBoardButton = this.createButton(
       x + width / 2,
       y + height * (3 / 5) + 100,
       '리더보드'
     )
-    LeaderBoardButton.on('pointerdown', () => {
+    leaderBoardButton.on('pointerdown', () => {
       this.scene.start('leaderBoard')
     })
   }
@@ -76,10 +78,10 @@ export default class LoadingScene extends Phaser.Scene {
 
     const borderRect = this.add.graphics()
 
-    // 배경색 설정 (흰색)
+    // background color
     borderRect.fillStyle(0x483d8b)
 
-    // 사각형 그래픽 위치 및 크기 설정 (텍스트의 바운딩 박스를 기준)
+    // rectangle
     borderRect.fillRect(
       buttonText.x - buttonText.width / 2 - 25,
       buttonText.y - buttonText.height / 2 - 10,

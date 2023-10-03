@@ -17,27 +17,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   gameOver() {
-    const { x, y, height, width } = this.cameras.main
-    const gameOverText = this.add
-      .text(x + width / 2, y + height / 2, 'Game Over')
-      .setFill('#FFF')
-      .setFontSize(48)
-      .setOrigin(0.5)
-      .setDepth(1000)
-    const time = this.timer.getElapsedTimeText()
-    const timeText = this.add
-      .text(x + width / 2, y + height / 2 + 60, time)
-      .setFill('#FFF')
-      .setFontSize(48)
-      .setOrigin(0.5)
-      .setDepth(1000)
-
     this.timer.pause()
     this.bullet.destroyAll()
-
-    this.input.keyboard.once('keydown-SPACE', () => {
-      this.scene.start('gameOver', { score: this.timer.getElapsedTime() })
-    })
 
     this.scene.start('gameOver', { score: this.timer.getElapsedTime() })
   }
@@ -62,22 +43,25 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     const { x, y, height, width } = this.cameras.main
-
+    //background
     const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0)
     const scaleX = this.sys.canvas.width / backgroundImage.width
-
     backgroundImage.setScale(scaleX).setScrollFactor(0)
 
+    // create player instance
     this.player = new Player(this, x + width / 2, (height * 9) / 10, 'player')
     this.player.setScale(scaleX * 10).setScrollFactor(0)
 
+    //create bullet instance
     this.bullet = new Bullet(this)
     this.bullet.setScale(scaleX * 10).setScrollFactor(0)
 
+    //create timer instance
     this.timer = new Timer(this, x + 30, y + 100)
   }
 
-  update(a) {
+  update() {
+    //generate bullet
     const sec = this.frameCount / 60
     const min = Math.floor(sec / 60)
     if (this.frameCount++ % (30 - min) === 0 && this.bullet.isUpdating) {

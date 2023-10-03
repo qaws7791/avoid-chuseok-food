@@ -7,7 +7,6 @@ import { LeaderBoard } from 'phaser3-rex-plugins/plugins/firebase-components'
 export default class LeaderBoardScene extends Phaser.Scene {
   constructor() {
     super('leaderBoard')
-    //get data from start method
   }
 
   preload() {
@@ -27,7 +26,8 @@ export default class LeaderBoardScene extends Phaser.Scene {
     const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0)
     const scaleX = this.sys.canvas.width / backgroundImage.width
     backgroundImage.setScale(scaleX).setScrollFactor(0)
-    //text
+
+    //title
     const TitleText = this.add
       .text(center.x, y + 100, '순위표')
       .setPadding(10)
@@ -35,6 +35,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
       .setFontSize(48)
       .setOrigin(0.5)
       .setDepth(1000)
+
     //restart button
     const restartText = this.add
       .text(center.x, y + height * (3 / 5), '시작', {
@@ -46,10 +47,8 @@ export default class LeaderBoardScene extends Phaser.Scene {
 
     const borderRect = this.add.graphics()
 
-    // 배경색 설정 (흰색)
     borderRect.fillStyle(0x483d8b)
 
-    // 사각형 그래픽 위치 및 크기 설정 (텍스트의 바운딩 박스를 기준)
     borderRect.fillRect(
       restartText.x - restartText.width / 2 - 10,
       restartText.y - restartText.height / 2 - 10,
@@ -63,10 +62,9 @@ export default class LeaderBoardScene extends Phaser.Scene {
     })
 
     //leaderboard
-
     const scores = await this.leaderBoard.loadFirstPage()
 
-    // display first 5 scores
+    // display scores 1st~5th
     const boardHeight = 400
     const boardWidth = 640
     const boardX = (width - boardWidth) / 2
@@ -78,6 +76,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
     const size = 5
 
     for (let i = 0; i < size; ++i) {
+      //label
       const num = this.add
         .text(boardX + 20, boardY + 50, `${i + 1}등`, {
           fontSize: '32px',
@@ -89,7 +88,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
 
       if (i < scores.length) {
         const scoreItem = scores[i]
-
+        //nickname
         const name = this.add
           .text(num.x + num.width + 10, boardY + 50, scoreItem.userName, {
             fontSize: '32px',
@@ -97,6 +96,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
           .setOrigin(0, 0.5)
 
         const nameWidth = 400
+        //score
         this.add
           .text(
             name.x + nameWidth + 10,

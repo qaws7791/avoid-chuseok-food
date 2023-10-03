@@ -6,13 +6,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, texture) {
     super(scene, x, y, texture)
     this.scene = scene
-
     this.isDown = false
     this.setDepth(10)
     this.speed = 2
     this.damageTime = 0
 
     const { x: cameraX, y: cameraY } = this.scene.cameras.main
+
+    // create player life instance
     this.life = new PlayerLife(scene, cameraX + 30, cameraY + 30, 100)
 
     this.keys = {
@@ -20,6 +21,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       right: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
     }
 
+    // create player animation
     scene.anims.create({
       key: 'player-idle',
       frames: this.anims.generateFrameNumbers('player-idle', {
@@ -45,18 +47,19 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this)
     this.setCollideWorldBounds(true)
 
-    // 물리 업데이트를 위해 플레이어를 동적 바디로 설정
+    // dynamic physics body
     scene.physics.world.enable(this)
-    // this.setCollideWorldBounds(true)
   }
 
   frameCount = 0
 
   preUpdate(time, delta) {
+    //animation
     if (this.frameCount++ % 30 === 0) {
       this.anims.nextFrame()
     }
 
+    // move player
     const pointer = this.scene.input.activePointer
     this.isDown = false
     if (pointer.isDown) {
@@ -74,8 +77,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       }
     }
 
-    // get current animation name
-
+    // change player texture
     this.changeTexture()
   }
 

@@ -55,7 +55,6 @@ const config = {
     ],
   },
 
-  // scene: [LoadingScene, GameScene],
   scene: [LoadingScene, GameScene, GameOverScene, LeaderBoardScene],
 }
 

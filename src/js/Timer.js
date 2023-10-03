@@ -12,7 +12,7 @@ export default class Timer extends Phaser.GameObjects.Text {
     if (!this.updating) return
     this.updateTime()
 
-    // 시간을 화면에 표시
+    // display elapsed time
     this.setText(this.getElapsedTimeText())
   }
 

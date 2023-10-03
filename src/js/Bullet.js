@@ -30,7 +30,6 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.scene = scene
     this.group = scene.physics.add.group({
       defaultKey: 'bullets',
-      // collideWorldBounds: true,
     })
 
     scene.physics.world.on('worldbounds', (body) => {
@@ -40,7 +39,6 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
   createBullet(target, speed) {
     const { x, y, width, height } = this.scene.cameras.main
-    const center = { x: x + width / 2, y: y + height / 2 }
     const offset = 5
     const mx = Phaser.Math.Between(x + offset, width - offset * 2)
     const bullets = this.group.createMultiple({
@@ -59,7 +57,6 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     bullets.forEach((bullet) => {
       bullet.setCircle(8)
-      // bullet.setVelocityY(speed)
       bullet.setGravityY(speed)
     })
 
@@ -82,7 +79,5 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     return this.isUpdating
   }
 
-  update() {
-    console.log(this)
-  }
+  update() {}
 }
