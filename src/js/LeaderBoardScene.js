@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import { v4 as uuidv4 } from 'uuid'
 
-import Background from '../images/background.jpg'
+import Background from '/images/background.jpg'
 import { LeaderBoard } from 'phaser3-rex-plugins/plugins/firebase-components'
 
 export default class LeaderBoardScene extends Phaser.Scene {

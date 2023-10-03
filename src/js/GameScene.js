@@ -1,7 +1,10 @@
 import Phaser from 'phaser'
 
-import Background from '../images/background.jpg'
-import PlayerHurt from '../images/player-hurt.png'
+import Bullets from '/images/bullets.png'
+import Background from '/images/background.jpg'
+import PlayerIdle from '/images/playerIdle.png'
+import PlayerRunning from '/images/player-running.png'
+import PlayerHurt from '/images/playerHurt.png'
 
 import Player from './Player.js'
 import Bullet from './Bullet.js'
@@ -41,17 +44,17 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image('background', Background)
-    this.load.image('player-hurt', '/src/images/player-hurt.png')
+    this.load.image('player-hurt', PlayerHurt)
 
-    this.load.spritesheet('player-idle', '/src/images/player-idle.png', {
+    this.load.spritesheet('player-idle', PlayerIdle, {
       frameWidth: 32,
       frameHeight: 32,
     })
-    this.load.spritesheet('player-running', '/src/images/player-running.png', {
+    this.load.spritesheet('player-running', PlayerRunning, {
       frameWidth: 32,
       frameHeight: 32,
     })
-    this.load.spritesheet('bullets', '/src/images/bullets.png', {
+    this.load.spritesheet('bullets', Bullets, {
       frameWidth: 64,
       frameHeight: 64,
     })

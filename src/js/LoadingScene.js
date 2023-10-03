@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import Background from '../images/background.jpg'
+import Background from '/images/background.jpg'
 
 export default class LoadingScene extends Phaser.Scene {
   constructor() {
